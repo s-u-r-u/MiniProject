@@ -11,10 +11,6 @@
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
   </properties>
-  <properties>
-  <!-- Other properties may exist here -->
-  <sonar.projectKey>your_project_key</sonar.projectKey>
-  </properties>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
