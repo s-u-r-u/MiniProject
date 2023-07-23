@@ -34,6 +34,7 @@ jobs:
       with:
         host: ${{ secrets.SONAR_HOST_URL }}
         login: ${{ secrets.SONAR_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         projectKey: MiniProject
         projectBaseDir: .
         encoding: UTF-8
