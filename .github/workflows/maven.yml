@@ -35,8 +35,4 @@ jobs:
         host: ${{ secrets.SONAR_HOST_URL }}
         login: ${{ secrets.SONAR_TOKEN }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        projectKey: MiniProject
-        projectBaseDir: .
-        encoding: UTF-8
-        # Add the -X switch here to enable debug logging
-        args: -X
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
