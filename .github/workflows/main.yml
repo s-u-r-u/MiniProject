@@ -41,5 +41,5 @@ jobs:
       - name: Build and analyze
         env:
           SONAR_TOKEN: sqp_a5db29a7babc3a449d229ade4cc730090ec05c4e
-          SONAR_HOST_URL: 192.168.29.235:9000
+          SONAR_HOST_URL: http://192.168.29.235:9000
         run: mvn -e -X -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
