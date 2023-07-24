@@ -34,5 +34,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          SONAR_HOST_URL: ${{ secrets.http://44.204.24.244:9000 }}
         run: mvn -B -X sonar:sonar org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=MiniProject -Dsonar.projectName='MiniProject'
