@@ -24,4 +24,3 @@ jobs:
         host: ${{ secrets.SONAR_HOST_URL }}
         login: ${{ secrets.SONAR_TOKEN }}
         ProjectKey: MiniProject
-      run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=MiniProject -Dsonar.projectName='MiniProject'
