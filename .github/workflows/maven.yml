@@ -13,6 +13,10 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+    
+permissions:
+  pull-requests: read # allows SonarQube to decorate PRs with analysis results
+
 
 jobs:
   build:
