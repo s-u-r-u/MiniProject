@@ -69,7 +69,7 @@ jobs:
           repository: maven-releases
           coordinates: groupId=com.example artifactId=app version=1.0.0
           assets: extension=jar
-          filename: ./target/MiniProject-1.0-SNAPSHOT.jar     
+          filename: /home/runner/work/MiniProject/MiniProject/target/MiniProject-1.0-SNAPSHOT.jar     
 
   Analysis:
     runs-on: ubuntu-latest
