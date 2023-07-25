@@ -29,8 +29,6 @@ jobs:
         with:
           name: maven-artifacts
           path: target
-      - name: Print JAR file name
-        run: echo "JAR file name: target/$(ls target | grep '.jar$')"
 
   Analysis:
     runs-on: ubuntu-latest
