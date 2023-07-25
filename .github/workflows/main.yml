@@ -25,9 +25,9 @@ jobs:
       - name: Export JAR file
         run: export JAR_FILE=$(ls target/*.jar)
       - name: Create staging directory
-        run: mkdir -p /home/staging/
+        run: sudo mkdir -p /home/staging/
       - name: Copying Artifact to another directory
-        run: cp target/*.jar /home/staging/
+        run: sudo cp target/*.jar /home/staging/
       - name: Generate settings.xml for Maven Builds
         uses: whelk-io/maven-settings-xml-action@v21
       - name: Persist Artifact
