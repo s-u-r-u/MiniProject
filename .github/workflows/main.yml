@@ -24,6 +24,11 @@ jobs:
         run: mvn -B clean install package --file pom.xml
       - name: Generate settings.xml for Maven Builds
         uses: whelk-io/maven-settings-xml-action@v21
+      - name: Persist Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: maven-artifacts
+          path: target
       - name: Print JAR file name
         run: echo "JAR file name: target/$(ls target | grep '.jar$')"
 
