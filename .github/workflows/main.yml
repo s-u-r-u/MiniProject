@@ -24,9 +24,6 @@ jobs:
         run: mvn -B clean install package --file pom.xml
       - name: Export JAR file
         run: export JAR_FILE=$(ls target/*.jar)
-      - name: Print package location
-        run: |
-          echo "Maven package file is located at: $(find ./target -type f -name '*.jar')"
       - name: Saving artifacts
         run: mkdir staging && cp target/*.jar staging
       - name: Generate settings.xml for Maven Builds
@@ -36,6 +33,9 @@ jobs:
         with:
           name: maven-artifacts
           path: target
+      - name: Print package location
+        run: |
+          echo "Maven package file is located at: $(find ./target -type f -name '*.jar')"
       - name: Check out the repo
         uses: actions/checkout@v3
       
