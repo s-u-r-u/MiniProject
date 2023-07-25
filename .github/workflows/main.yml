@@ -24,8 +24,6 @@ jobs:
         run: mvn -B clean install package --file pom.xml
       - name: Export JAR file
         run: export JAR_FILE=$(ls target/*.jar)
-      - name: JAR file name
-        run: echo "Generated JAR file: $JAR_FILE"
       - name: Saving artifacts
         run: mkdir staging && cp target/*.jar staging
       - name: Generate settings.xml for Maven Builds
