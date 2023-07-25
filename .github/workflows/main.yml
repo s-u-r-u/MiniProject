@@ -21,9 +21,10 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Build with Maven
-        run: 
-          mvn -B clean install package --file pom.xml
-          mkdir target && cp target/*.jar target
+        run: mvn -B clean install package --file pom.xml
+        
+      - name: Making a directory and copying the jar file
+        run: mkdir target && cp target/*.jar target
         
       - name: Generate settings.xml for Maven Builds
         uses: whelk-io/maven-settings-xml-action@v21
