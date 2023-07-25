@@ -32,8 +32,6 @@ jobs:
         run: sudo cp target/*.jar /home/staging/
       - name: Move Jar files to build context
         run: mv /home/staging/*.jar ./
-      - name: Generate settings.xml for Maven Builds
-        uses: whelk-io/maven-settings-xml-action@v21
       - name: Persist Artifact
         uses: actions/upload-artifact@v2
         with:
@@ -42,17 +40,12 @@ jobs:
       - name: Print package location
         run: |
           echo "Maven package file is located at: $(find . -type f -name '*.jar')"
-      - name: Check out the repo
-        uses: actions/checkout@v3
       
       - name: Log in to Docker Hub
         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-      
-      - uses: actions/checkout@v3
-        name: Check out code
 
       - name: Build and push Docker image
         run: docker build -f ./Dockerfile.yml -t docker.io/surusuraj200021/mini-project:latest .
