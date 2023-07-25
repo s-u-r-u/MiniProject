@@ -26,7 +26,7 @@ jobs:
     - name: Generate settings.xml for Maven Builds
       uses: whelk-io/maven-settings-xml-action@v21
     - name: Print JAR file name
-      run: echo "JAR file name: target/$(ls target | grep '.jar$' )"
+      run: echo "JAR file name: target/$(ls target | grep '.jar$')"
   Analysis:
     runs-on: ubuntu-latest
     steps:
