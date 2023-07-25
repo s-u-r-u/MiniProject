@@ -26,6 +26,9 @@ jobs:
         run: export JAR_FILE=$(ls target/*.jar)
       - name: ls
         run: sudo ls .
+      - name: remove files
+        run: sudo rm rf /opt/pipx/venvs/ansible-core/lib/python3.10/site-packages/ansible_collections/cyberark/conjur/roles/conjur_host_identity/tests/.dockerignore /usr/local/lib/heroku/node_modules/@heroku-cli/plugin-redis-v5/node_modules/cpu-features/deps/cpu_features/.dockerignore /home/runneradmin/.nvm/.dockerignore /home/linuxbrew/.linuxbrew/Homebrew/.dockerignore /home/runner/.nvm/.dockerignore /home/runner/work/_actions/docker/login-action/f4ef78c080cd8ba55a85445d5b36e214a81df20a/.dockerignore /home/runner/work/_actions/docker/metadata-action/9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7/.dockerignore /etc/skel/.nvm/.dockerignore
+
       - name: Create staging directory
         run: sudo mkdir -p /home/staging/
       - name: Copying Artifact to another directory
