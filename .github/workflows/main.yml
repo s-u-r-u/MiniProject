@@ -25,7 +25,7 @@ jobs:
       - name: Export JAR file
         run: export JAR_FILE=$(ls target/*.jar)
       - name: ls
-        run: sudo pwd
+        run: sudo ls -latr
       - name: Create staging directory
         run: sudo mkdir -p /home/staging/
       - name: Copying Artifact to another directory
