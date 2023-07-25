@@ -37,7 +37,7 @@ jobs:
           path: target
       - name: Print package location
         run: |
-          echo "Maven package file is located at: $(find ./target -type f -name '*.jar')"
+          echo "Maven package file is located at: $(find . -type f -name '*.jar')"
       - name: Check out the repo
         uses: actions/checkout@v3
       
