@@ -72,6 +72,8 @@ jobs:
           filename: ./target/MiniProject-1.0-SNAPSHOT.jar
   Docker:
     runs-on: ubuntu-latest
+    needs: Building_and_Sonarqube-Analysis
+    if: ${{ needs.Building_and_Sonarqube-Analysis.result == 'success' }}
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 17
