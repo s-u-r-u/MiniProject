@@ -1,3 +1,4 @@
+
 name: Java CI with Maven
 
 on:
@@ -42,25 +43,6 @@ jobs:
       - name: Print package location
         run: |
           echo "Maven package file is located at: $(find . -type f -name '*.jar')"
-          
-          
-          
-      - name: Analyze with SonarQube
-        uses: SonarSource/sonarqube-scan-action@7295e71c9583053f5bf40e9d4068a0c974603ec8
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
-          SONAR_TOKEN: sqp_a9726d65af895f050e9816642da97f18d4c958c5   
-          SONAR_HOST_URL: http://44.204.163.8:9000   
-        with:
-          args:
-            -Dsonar.projectKey=MiniProject
-      - name: Get SonarQube Analysis Status
-        id: sonar_status
-        run: echo "::set-output name=status::${{ steps.sonarqube_analysis.outputs.status }}"
-            
-            
-            
-            
       
       - name: Log in to Docker Hub
         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
@@ -94,3 +76,15 @@ jobs:
           coordinates: groupId=com.example artifactId=app version=1.0.0
           assets: extension=jar
           filename: ./target/MiniProject-1.0-SNAPSHOT.jar
+  Analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Analyze with SonarQube
+        uses: SonarSource/sonarqube-scan-action@7295e71c9583053f5bf40e9d4068a0c974603ec8
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
+          SONAR_TOKEN: sqp_a9726d65af895f050e9816642da97f18d4c958c5   
+          SONAR_HOST_URL: http://44.204.163.8:9000/  
+        with:
+          args:
+            -Dsonar.projectKey=MiniProject
