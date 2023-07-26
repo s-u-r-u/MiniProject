@@ -43,6 +43,17 @@ jobs:
       - name: Print package location
         run: |
           echo "Maven package file is located at: $(find . -type f -name '*.jar')"
+      
+      
+      - name: Analyze with SonarQube
+        uses: SonarSource/sonarqube-scan-action@7295e71c9583053f5bf40e9d4068a0c974603ec8
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
+          SONAR_TOKEN: sqp_a9726d65af895f050e9816642da97f18d4c958c5   
+          SONAR_HOST_URL: http://44.204.163.8:9000/  
+        with:
+          args:
+            -Dsonar.projectKey=MiniProject
           
           
       - name: Build with Maven
@@ -72,16 +83,3 @@ jobs:
     
       - name: Push Docker image to Docker Hub
         run: docker push docker.io/surusuraj200021/mini-project:latest
- 
-  Analysis:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Analyze with SonarQube
-        uses: SonarSource/sonarqube-scan-action@7295e71c9583053f5bf40e9d4068a0c974603ec8
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
-          SONAR_TOKEN: sqp_a9726d65af895f050e9816642da97f18d4c958c5   
-          SONAR_HOST_URL: http://44.204.163.8:9000/  
-        with:
-          args:
-            -Dsonar.projectKey=MiniProject
