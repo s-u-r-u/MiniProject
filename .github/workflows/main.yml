@@ -22,7 +22,7 @@ jobs:
         with:
           args:
             -Dsonar.projectKey=MiniProject
-  Nexus_Repository:
+  Building_with_Maven_and_Nexus_Repository:
     runs-on: ubuntu-latest
     needs: Sonarqube-Analysis
     if: ${{ needs.Sonarqube-Analysis.result == 'success' }}
@@ -59,8 +59,8 @@ jobs:
           filename: ./target/MiniProject-1.0-SNAPSHOT.jar
   Building_Docker-Image_and_pushing_to_DockerHub:
     runs-on: ubuntu-latest
-    needs: Nexus_Repository
-    if: ${{ needs.Nexus_Repository.result == 'success' }}
+    needs: Building_with_Maven_and_Nexus_Repository
+    if: ${{ needs.Building_with_Maven_and_Nexus_Repository.result == 'success' }}
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 17
