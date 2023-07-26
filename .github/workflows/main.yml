@@ -1,5 +1,4 @@
-
-name: Java CI with Maven
+name: Java CI with Maven, Sonarqube, Nexus and Docker
 
 on:
   push:
@@ -11,7 +10,7 @@ permissions:
   pull-requests: read
 
 jobs:
-  Analysis:
+  Building_and_Sonarqube-Analysis:
     runs-on: ubuntu-latest
     steps:
       - name: Analyze with SonarQube
@@ -23,13 +22,11 @@ jobs:
         with:
           args:
             -Dsonar.projectKey=MiniProject
-        
-
-            
-  build:
+                
+  Nexus:
     runs-on: ubuntu-latest
-    needs: Analysis
-    if: ${{ needs.Analysis.result == 'success' }}
+    needs: Building_and_Sonarqube-Analysis
+    if: ${{ needs.Building_and_Sonarqube-Analysis.result == 'success' }}
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 17
@@ -73,6 +70,40 @@ jobs:
           coordinates: groupId=com.example artifactId=app version=1.0.0
           assets: extension=jar
           filename: ./target/MiniProject-1.0-SNAPSHOT.jar
+  Docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+      - name: Build with Maven
+        run: mvn -B clean install package --file pom.xml
+      - name: Export JAR file
+        run: export JAR_FILE=$(ls target/*.jar)
+      - name: pwd
+        run: sudo pwd .
+      - name: remove files
+        run: sudo rm -rf /opt/pipx/venvs/ansible-core/lib/python3.10/site-packages/ansible_collections/cyberark/conjur/roles/conjur_host_identity/tests/.dockerignore /usr/local/lib/heroku/node_modules/@heroku-cli/plugin-redis-v5/node_modules/cpu-features/deps/cpu_features/.dockerignore /home/runneradmin/.nvm/.dockerignore /home/linuxbrew/.linuxbrew/Homebrew/.dockerignore /home/runner/.nvm/.dockerignore /home/runner/work/_actions/docker/login-action/f4ef78c080cd8ba55a85445d5b36e214a81df20a/.dockerignore /home/runner/work/_actions/docker/metadata-action/9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7/.dockerignore /etc/skel/.nvm/.dockerignore
+      - name: Create staging directory
+        run: sudo mkdir -p /home/staging/
+      - name: Copying Artifact to another directory
+        run: sudo cp target/*.jar /home/staging/
+      - name: Move Jar files to build context
+        run: mv /home/staging/*.jar ./
+      - name: Persist Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: maven-artifacts
+          path: target
+      - name: Print package location
+        run: |
+          echo "Maven package file is located at: $(find . -type f -name '*.jar')"
+      - name: Build with Maven
+        run: mvn -B -X clean install package --file pom.xml
       - name: Log in to Docker Hub
         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
         with:
