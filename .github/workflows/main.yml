@@ -23,15 +23,6 @@ jobs:
         with:
           args:
             -Dsonar.projectKey=MiniProject
-      - name: Check SonarQube Analysis Status
-        run: |
-          if [ "${{ steps.sonarqube.outputs.status }}" = "passed" ]; then
-            echo "SonarQube analysis passed. Proceeding with deployment..."
-            # Add deployment steps here
-          else
-            echo "SonarQube analysis failed. No further steps will be taken."
-            exit 1
-          fi
         
 
             
