@@ -24,16 +24,21 @@ jobs:
           args:
             -Dsonar.projectKey=MiniProject
       - name: Check SonarQube Analysis Status
-        if: steps.sonarqube.outputs.status == 'failed'
-        run: echo "SonarQube analysis failed."
-      - name: Check for Success
-        if: steps.sonarqube.outputs.status == 'passed'
-        run: echo "Success"
+        run: |
+          if [ "${{ steps.sonarqube.outputs.status }}" = "passed" ]; then
+            echo "SonarQube analysis passed. Proceeding with deployment..."
+            # Add deployment steps here
+          else
+            echo "SonarQube analysis failed. No further steps will be taken."
+            exit 1
+          fi
         
 
             
   build:
     runs-on: ubuntu-latest
+    needs: Analysis
+    if: ${{ needs.Analysis.result == 'success' }}
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 17
