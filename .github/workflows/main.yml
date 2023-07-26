@@ -23,6 +23,10 @@ jobs:
         with:
           args:
             -Dsonar.projectKey=MiniProject
+      - name: Check SonarQube Analysis Status
+        if: steps.sonarqube.outputs.status == 'failed'
+        run: echo "SonarQube analysis failed."
+
             
   build:
     runs-on: ubuntu-latest
