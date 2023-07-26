@@ -26,6 +26,10 @@ jobs:
       - name: Check SonarQube Analysis Status
         if: steps.sonarqube.outputs.status == 'failed'
         run: echo "SonarQube analysis failed."
+      - name: Check for Success
+        if: steps.sonarqube.outputs.status == 'passed'
+        run: echo "Success"
+        
 
             
   build:
