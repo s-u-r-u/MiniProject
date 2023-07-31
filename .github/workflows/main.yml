@@ -12,8 +12,6 @@ permissions:
 jobs:
   Building_with_Maven_and_Nexus_Repository:
     runs-on: ubuntu-latest
-    needs: Sonarqube-Analysis
-    if: ${{ needs.Sonarqube-Analysis.result == 'success' }}
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 17
