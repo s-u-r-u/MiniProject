@@ -17,8 +17,8 @@ jobs:
         uses: SonarSource/sonarqube-scan-action@7295e71c9583053f5bf40e9d4068a0c974603ec8
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
-          SONAR_TOKEN: sqp_a9726d65af895f050e9816642da97f18d4c958c5   
-          SONAR_HOST_URL: http://34.205.140.184:9000/  
+          SONAR_TOKEN: sqp_7b8cc3087efed5ef8c0af83f8d95f055598cfca9   
+          SONAR_HOST_URL: http://34.201.108.253:9000  
         with:
           args:
             -Dsonar.projectKey=MiniProject
@@ -49,7 +49,7 @@ jobs:
       - name: Nexus Repo Publish
         uses: sonatype-nexus-community/nexus-repo-github-action@master
         with:
-          serverUrl: http://54.197.17.194:8081/
+          serverUrl: http://54.89.146.233:8081/
           username: admin
           password: ${{ secrets.password }}
           format: maven2
