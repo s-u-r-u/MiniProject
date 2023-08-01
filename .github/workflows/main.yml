@@ -47,12 +47,12 @@ jobs:
         with:
           serverUrl: http://54.86.74.118:8081/
           username: admin
-          password: ${{ secrets.PASSWORD }}
+          password: Suraj@764001
           format: maven2
           repository: MiniProject
-          coordinates: groupId=com.example artifactId=app version=1.0.0
-          assets: extension=jar
+          coordinates: com.example:app:1.0.0
           filename: ./target/MiniProject-1.0-SNAPSHOT.jar
+
   Building_Docker-Image_and_pushing_to_DockerHub:
     runs-on: ubuntu-latest
     needs: Building_with_Maven_and_Nexus_Repository
