@@ -50,6 +50,7 @@ jobs:
           password: Suraj@764001
           format: maven2
           repository: MiniProject
+          assets: extension=jar
           coordinates: com.example:app:1.0.0
           filename: ./target/MiniProject-1.0-SNAPSHOT.jar
 
