@@ -73,7 +73,7 @@ jobs:
           username: admin
           password: Suraj@764001
           format: maven2
-          repository: MiniProject
+          repository: maven-snapshots
           coordinates: groupId=com.example artifactId=app version=1.0.0
           assets: extension=jar
           filename: ./target/MiniProject-1.0-SNAPSHOT.jar
